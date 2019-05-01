@@ -3,7 +3,7 @@ CXXFLAGS = -Wall -O3
 LIBS = -lwiringPi
 EXE = lora
 OBJS = lora.o lorapacket.o
-INC = -I ../../../libraries/wiringPi/wiringPi
+INC = -I include
 
 all: $(EXE)
 
@@ -13,9 +13,9 @@ clean:
 $(EXE): $(OBJS)
 	g++ $(OBJS) $(LIBS) -o $@
 
-lora.o: lora.cpp lora.h
+lora.o: lora.cpp include/lora.h
 	g++ -c $(CXXFLAGS) $(INC) lora.cpp
 
-lorapacket.o: lorapacket.cpp lorapacket.h
+lorapacket.o: lorapacket.cpp include/lorapacket.h
 	g++ -c $(CXXFLAGS) $(INC) lorapacket.cpp
 

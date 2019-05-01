@@ -15,6 +15,8 @@ This chipset operates in both LoRa and FSK/OOK modes, however this driver suppor
 
 ## Examples
 
+See the sample applications in the [examples](examples) folder.
+
 ## Credits
 
 Inspiration (and implementation hints) came from the [Arduino LoRa library](arduiono-lora) by [Sandeep Mistry](sandeep-mistry). Without a working reference implementation for testing, development of this library would scarcely have been possible.
@@ -29,4 +31,4 @@ Inspiration (and implementation hints) came from the [Arduino LoRa library](ardu
 
 ## License
 
-MIT
+This software is licensed under the [MIT License](LICENSE.md).
