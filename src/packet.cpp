@@ -2,7 +2,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
-#include "lorapacket.h"
+#include "packet.h"
 
 LoRaPacket::LoRaPacket(unsigned char *payload, size_t size) :
 	_payload(payload),

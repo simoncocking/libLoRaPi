@@ -1,3 +1,6 @@
+#ifndef _PACKET_H
+#define _PACKET_H
+
 #include <string.h>
 #include <stdint.h>
 
@@ -19,3 +22,5 @@ class LoRaPacket {
 		int getSNR();
 		void setPayload(unsigned char *, size_t size);
 };
+
+#endif

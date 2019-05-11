@@ -1,21 +1,21 @@
 CXX = g++
 CXXFLAGS = -Wall -O3
 LIBS = -lwiringPi
-EXE = lora
-OBJS = lora.o lorapacket.o
+TARGET = liblorapi.a
+OBJS = lora.o packet.o
 INC = -I include
+LIB = ../lib
 
-all: $(EXE)
+all: $(TARGET)
 
 clean:
-	rm -f $(EXE) *.o
+	rm -f $(TARGET) *.o
 
-$(EXE): $(OBJS)
-	g++ $(OBJS) $(LIBS) -o $@
+$(TARGET): $(OBJS)
+	ar rcs $(LIB)/$@ $^
 
 lora.o: lora.cpp include/lora.h
-	g++ -c $(CXXFLAGS) $(INC) lora.cpp
+	g++ -c $(CXXFLAGS) $(INC) $<
 
-lorapacket.o: lorapacket.cpp include/lorapacket.h
-	g++ -c $(CXXFLAGS) $(INC) lorapacket.cpp
-
+packet.o: packet.cpp include/packet.h
+	g++ -c $(CXXFLAGS) $(INC) $<

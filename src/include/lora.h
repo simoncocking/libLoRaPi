@@ -1,3 +1,9 @@
+#ifndef _LORA_H
+#define _LORA_H
+
+#include <stdint.h>
+#include "packet.h"
+
 #define OSC_FREQ                 32e6
 #define MAX_PACKET_LEN           0xFF
 
@@ -106,3 +112,82 @@
 #define MAP_DIO1_LORA_RXTOUT     0x00  // --00----
 #define MAP_DIO1_LORA_NOP        0x30  // --11----
 #define MAP_DIO2_LORA_NOP        0xC0  // ----11--
+
+class LoRa {
+	private:
+		unsigned char _spibuf[2];
+		uint8_t  _spi_channel;
+		uint8_t  _ss_pin;
+		uint8_t  _dio0_pin;
+		uint8_t  _rst_pin;
+		void selectReceiver();
+		void deselectReceiver();
+		uint8_t readRegister(uint8_t);
+		void writeRegister(uint8_t, uint8_t);
+		void setOpMode(uint8_t);
+		uint8_t getOpMode();
+		bool receive(unsigned char *);
+		size_t write(const uint8_t *, size_t);
+
+	public:
+		enum freq_t {
+			FREQ_433 = 433003300,
+			FREQ_868 = 868100000,
+			FREQ_915 = 915000000
+		};
+		static const uint32_t bw[10];
+		enum bw_t {
+			BW_7k8,  BW_10k4,  BW_15k6,
+			BW_20k8, BW_31k25, BW_41k7,
+			BW_62k5, BW_125k,  BW_250k,
+			BW_500k
+		};
+		enum sf_t { SF_6 = 6, SF_7, SF_8, SF_9, SF_10, SF_11, SF_12 };
+		enum hm_t { HM_EXPLICIT, HM_IMPLICIT };
+		enum cr_t { CR_45 = 1, CR_46, CR_47, CR_48 };
+		enum lna_gain_t {
+			LNA_G1 = 1, LNA_G2, LNA_G3,
+			LNA_G4,     LNA_G5, LNA_G6,
+			LNA_AGC
+		};
+	
+		LoRa(uint8_t, uint8_t, uint8_t, uint8_t);
+		LoRa      *setSpreadFactor(sf_t);
+		LoRa      *setFrequency(freq_t);
+		LoRa      *setBandwidth(bw_t);
+		LoRa      *setTXPower(uint8_t);
+		LoRa      *setHeaderMode(hm_t);
+		LoRa      *setCodingRate(cr_t);
+		LoRa      *setSyncWord(uint8_t);
+		LoRa      *setLNAGain(lna_gain_t);
+		LoRa      *setLNABoost(bool);
+		LoRa      *enableCRC();
+		LoRa      *disableCRC();
+		sf_t       getSpreadFactor();
+		freq_t     getFrequency();
+		bw_t       getBandwidth();
+		uint8_t    getTXPower();
+		hm_t       getHeaderMode();
+		cr_t       getCodingRate();
+		uint8_t    getSyncWord();
+		lna_gain_t getLNAGain();
+		bool       getLNABoost();
+		uint32_t   getFrequencyError();
+
+		bool begin();
+		void sleep();
+		void standby();
+		uint8_t version();
+
+		LoRaPacket receivePacket();
+		size_t transmitPacket(LoRaPacket *);
+};
+
+const uint32_t LoRa::bw[10] = {
+	7800,  10400,  15600,
+	20800, 31250,  41700,
+	62500, 125000, 250000,
+	500000
+};
+
+#endif
