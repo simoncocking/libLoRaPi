@@ -129,8 +129,8 @@ Inspiration (and implementation hints) came from the [Arduino LoRa library](ardu
 
 ## References
 
-[Semtech SX1278 product data]: https://www.semtech.com/products/wireless-rf/lora-transceivers/SX1278
-[Semtech SX1278 datasheet]: https://www.semtech.com/uploads/documents/DS_SX1276-7-8-9_W_APP_V6.pdf
+Semtech SX1278 product data: https://www.semtech.com/products/wireless-rf/lora-transceivers/SX1278
+Semtech SX1278 datasheet: https://www.semtech.com/uploads/documents/DS_SX1276-7-8-9_W_APP_V6.pdf
 
 ## License
 
