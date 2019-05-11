@@ -1,5 +1,5 @@
-libLoRaPi
-=========
+libLoRaPi (A work in progress)
+==============================
 
 A C++ library to interface with the [Dragino](dragino) [LoRa](lora) Hat for [Raspberry Pi](raspi). This board is based on the Semtech SX127[6789] chipset, and supports all global ISM bands. It also has an on-board GPS chipset based on the [Mediatek MT3339](mtk) however this driver does not support its use. Communication is via SPI, using the [wiringPi](wiringPi) SPI library.
 
@@ -113,6 +113,12 @@ Note that all `set()` methods return `this`, so they can be chained.
 ## Examples
 
 See the sample applications in the [examples](examples) folder.
+
+## To Do
+* Code to receive transmissions (!!)
+* More examples
+* Finish the documentation
+* Tests!
 
 ## Credits
 
