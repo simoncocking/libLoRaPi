@@ -13,7 +13,7 @@ This chipset operates in both LoRa and FSK/OOK modes, however this driver suppor
 
 ## Usage
 
-Note that all `set()` methods return `*self`, so they can be chained.
+Note that all `set()` methods return `this`, so they can be chained.
 
 ```c++
 	/**
