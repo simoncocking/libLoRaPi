@@ -9,17 +9,19 @@ class LoRaPacket {
 		unsigned char *_payload;
 		size_t _payload_len;
 		int _packet_rssi;
-		int _rssi;
-		int _snr;
+		int _freq_err;
+		float _snr;
+		void _setPayload(unsigned char *, size_t);
 
 	public:
 		LoRaPacket(unsigned char *, size_t);
-		LoRaPacket(unsigned char *, size_t, int, int, int);
+		LoRaPacket(unsigned char *, size_t, int, int, float);
+		~LoRaPacket();
 		unsigned char *getPayload();
 		size_t payloadLength();
 		int getPacketRSSI();
-		int getRSSI();
-		int getSNR();
+		int getFreqErr();
+		float getSNR();
 		void setPayload(unsigned char *, size_t size);
 };
 

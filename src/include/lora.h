@@ -126,7 +126,7 @@ class LoRa {
 		void writeRegister(uint8_t, uint8_t);
 		void setOpMode(uint8_t);
 		uint8_t getOpMode();
-		bool receive(unsigned char *);
+		size_t receive(unsigned char *);
 		size_t write(const uint8_t *, size_t);
 
 	public:
@@ -150,10 +150,10 @@ class LoRa {
 			LNA_G4,     LNA_G5, LNA_G6,
 			LNA_AGC
 		};
-	
+
 		LoRa(uint8_t, uint8_t, uint8_t, uint8_t);
 		LoRa      *setSpreadFactor(sf_t);
-		LoRa      *setFrequency(freq_t);
+		LoRa      *setFrequency(uint32_t);
 		LoRa      *setBandwidth(bw_t);
 		LoRa      *setTXPower(uint8_t);
 		LoRa      *setHeaderMode(hm_t);
@@ -164,7 +164,7 @@ class LoRa {
 		LoRa      *enableCRC();
 		LoRa      *disableCRC();
 		sf_t       getSpreadFactor();
-		freq_t     getFrequency();
+		uint32_t   getFrequency();
 		bw_t       getBandwidth();
 		uint8_t    getTXPower();
 		hm_t       getHeaderMode();
@@ -172,7 +172,7 @@ class LoRa {
 		uint8_t    getSyncWord();
 		lna_gain_t getLNAGain();
 		bool       getLNABoost();
-		uint32_t   getFrequencyError();
+		int        getFrequencyError();
 
 		bool begin();
 		void sleep();
@@ -181,13 +181,6 @@ class LoRa {
 
 		LoRaPacket receivePacket();
 		size_t transmitPacket(LoRaPacket *);
-};
-
-const uint32_t LoRa::bw[10] = {
-	7800,  10400,  15600,
-	20800, 31250,  41700,
-	62500, 125000, 250000,
-	500000
 };
 
 #endif
