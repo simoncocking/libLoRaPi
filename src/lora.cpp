@@ -341,20 +341,17 @@ size_t LoRa::transmitPacket(LoRaPacket *packet)
 	while (size > 0)
 	{
 		size_t bytes = write(payload, size);
-		printf("Wrote %d bytes\n", bytes);
 		if (bytes == 0)
 			break;
 		payload += bytes;
 		size -= bytes;
 	}
-	printf("Beginning TX\n");
 	setOpMode(OPMODE_TX);
 	while ((readRegister(REG_IRQ_FLAGS) & IRQ_TXDONE_MASK) == 0)
 	{
 		usleep(1000);
 	}
 	writeRegister(REG_IRQ_FLAGS, IRQ_TXDONE_MASK);
-	printf("Done TX\n");
 	sleep();
 	return packet->payloadLength() - size;
 }
