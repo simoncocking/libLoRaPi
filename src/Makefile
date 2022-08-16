@@ -12,6 +12,7 @@ clean:
 	rm -f $(TARGET) *.o
 
 $(TARGET): $(OBJS)
+	mkdir -p $(LIB)
 	ar rcs $(LIB)/$@ $^
 
 lora.o: lora.cpp include/lora.h
